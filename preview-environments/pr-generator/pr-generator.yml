@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: my-preview-apps
-  namespace: argocd  
+  namespace: argocd
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
@@ -12,12 +12,10 @@ spec:
         github:
           owner: alienwoods
           repo: gitops-cert-level-3-examples
+          # filter by PR label "preview-ready"
+          labels:
+            - preview-ready
         requeueAfterSeconds: 180
-
-        filters:
-          - pullRequest:
-              labels:
-                - preview-ready
 
   template:
     metadata:
